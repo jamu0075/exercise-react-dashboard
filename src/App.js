@@ -18,7 +18,7 @@ class App extends Component {
           unique_id: '1',
           id: '1',
           status: 'Ongoing',
-          company: 'Company A',
+          company: 'A',
           start_date: '01/01/2020',
           end_date: '06/01/2020',
           description: 'Details about the contract here...',
@@ -29,7 +29,7 @@ class App extends Component {
           unique_id: '2',
           id: '2',
           status: 'Ongoing',
-          company: 'Insurance Company',
+          company: 'B',
           start_date: '10/01/2019',
           end_date: '10/01/2020',
           description: 'This is a good contract!',
@@ -40,7 +40,7 @@ class App extends Component {
           unique_id: '3',
           id: '3',
           status: 'Completed',
-          company: 'Cool Company',
+          company: 'C',
           start_date: '11/01/2019',
           end_date: '03/01/2020',
           description: 'This went well! Would love to work with them again.',
@@ -58,14 +58,12 @@ class App extends Component {
     return (
       <div className="app">
         <Router>
-          <Header isAuth={ this.state.isAuth }/>
-          <NavColumn />
+          <Header isAuth={ this.state.isAuth } />
+          <NavColumn isAuth={ this.state.isAuth } />
           <Switch>
             <Route path='/' exact component={ BodyHome } />
             <Route path='/login' render={ (props) => <LoginPage {...props} onAuthenticate={ this.handleAuthenticate } isAuth={ this.state.isAuth } /> } />
-            { this.state.isAuth 
-            ? <Route path='/contracts' render={ (props) => <BodyContracts {...props} contracts={this.state.contractList } />} />
-            : <LoginRequired /> }
+            <Route path='/contracts' render={ (props) => <BodyContracts {...props} contracts={this.state.contractList } />} />
           </Switch>
         </Router>
       </div>

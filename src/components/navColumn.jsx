@@ -8,8 +8,8 @@ class NavColumn extends Component {
             <div className='navbar-left'>
                 <nav>
                     <ul className="navList">
-                        <Link to="/"><li>Home</li></Link>
-                        <Link to="/contracts"><li>Contracts</li></Link>
+                        <Link to='/'><li>Home</li></Link>
+                        <Link to={ this.props.isAuth ? '/contracts' : '/login' }><li>Contracts</li></Link>
                     </ul>
                 </nav>
             </div>

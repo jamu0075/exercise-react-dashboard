@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Table } from 'reactstrap'
 
 class BodyContracts extends Component {
-    state = { 
-
-    };
-
     createTableRow (contract) {
         return(
             <tr key={contract.unique_id}>
