@@ -4,7 +4,7 @@ class LoginRequired extends Component {
     render() { 
         return (
             <div className="body">
-                <h3>Sign in required to view content.</h3>
+                <h3>Sign-in required to view content.</h3>
             </div>
           );
     }
