@@ -5,14 +5,6 @@ import ContractFrom from './addContractForm'
 import Popup from 'reactjs-popup';
 
 class BodyContracts extends Component {
-    state = {
-        isFormVisable: false
-    };
-
-    toggleForm = () => {
-        this.setState({ isFormVisable: !this.state.isFormVisable });
-    }
-
     createTableRow (contract) {
         return(
             <tr key={contract.unique_id}>
@@ -32,10 +24,8 @@ class BodyContracts extends Component {
         return (
             <div className='body'>
                 <h1>Contracts</h1>
-                {/* <Button color="primary mb-3" onClick={ this.toggleForm }>Add Contract</Button> */}
-                {/* { this.state.isFormVisable ? <ContractFrom /> : null } */}
                 <Popup trigger={<Button color="primary"className="mb-3"> Add Contract </Button>} modal>
-                    <ContractFrom />
+                    <ContractFrom onAddContract={ this.props.onAddContract }/>
                 </Popup>
                 <Table className="table-responsive table-bordered">
                     <thead>
@@ -51,7 +41,7 @@ class BodyContracts extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.contracts.map((contract) => this.createTableRow(contract))}
+                        { this.props.contracts.map((contract) => this.createTableRow(contract)) }
                     </tbody>
                 </Table>
             </div>

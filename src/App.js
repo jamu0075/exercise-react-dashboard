@@ -10,11 +10,13 @@ import BodyHome from './components/bodyHome'
 import BodyContracts from './components/bodyContracts'
 
 class App extends Component {
+  // Simple single source state that maintains "authentication" status and contract info
   state = {
     isAuth: true,
+    unique_id_value: 4,
     contractList : [
       {
-          unique_id: '1',
+          unique_id: 1,
           id: '1',
           status: 'Ongoing',
           company: 'A',
@@ -25,7 +27,7 @@ class App extends Component {
           contact_phone: '123-456-7890'
       },
       {
-          unique_id: '2',
+          unique_id: 2,
           id: '2',
           status: 'Ongoing',
           company: 'B',
@@ -36,7 +38,7 @@ class App extends Component {
           contact_phone: '123-456-7890'
       },
       {
-          unique_id: '3',
+          unique_id: 3,
           id: '3',
           status: 'Completed',
           company: 'C',
@@ -49,8 +51,33 @@ class App extends Component {
     ]
   };
 
+  // Handles simple "Authentication" that toggles single source 'isAuth' boolean
   handleAuthenticate = () => {
     this.setState({ isAuth: !this.state.isAuth});
+  };
+
+  // Handles the unique ID incrementation by adding 1
+  handleUniqueIDIncrement = () => {
+    this.setState({ unique_id_value: this.state.unique_id_value + 1 })
+  };
+
+  // Handles creating a new contract object and adding to single source contract list
+  handleAddContract = (event) => {
+    this.handleUniqueIDIncrement();
+
+    const newContract = {
+      unique_id: this.state.unique_id_value,
+      id: event.id,
+      status: event.status,
+      company: event.company,
+      start_date: event.start_date,
+      end_date: event.end_date,
+      description: event.description,
+      contact_email: event.contact_email,
+      contact_phone: event.contact_phone 
+    };
+    
+    this.setState({ contractList: this.state.contractList.concat(newContract) })
   };
 
   render() {
@@ -62,7 +89,7 @@ class App extends Component {
           <Switch>
             <Route path='/' exact component={ BodyHome } />
             <Route path='/login' render={ (props) => <LoginPage {...props} onAuthenticate={ this.handleAuthenticate } isAuth={ this.state.isAuth } /> } />
-            <Route path='/contracts' render={ (props) => <BodyContracts {...props} contracts={this.state.contractList } />} />
+            <Route path='/contracts' render={ (props) => <BodyContracts {...props} onAddContract={ this.handleAddContract } contracts={this.state.contractList } />} />
           </Switch>
         </Router>
       </div>

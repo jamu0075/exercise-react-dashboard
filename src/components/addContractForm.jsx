@@ -3,49 +3,73 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 
 class ContractForm extends Component {
+    // Local state to pass to parent
+    state = {
+        id: '',
+        company: '',
+        description: '',
+        start_date: '',
+        end_date: '',
+        contact_email: '',
+        contact_phone: '',
+        status: '',
+    };
+
+    // Set the local state based on form changes
+    handleInputChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+    };
+
+    // On form submit, lift the state to grandparent(App.js) for handling
+    handleFormSubmit = () => {
+        this.props.onAddContract(this.state);
+    };
+
     render() { 
         return (
-            <Form className="mb-5">
+            <Form>
+                <FormGroup>
+                    <Label>ID</Label>
+                    <Input value={ this.state.id } onChange={ this.handleInputChange } type="text" name="id" placeholder="xx" />
+                </FormGroup>
                 <FormGroup>
                     <Label>Company Name</Label>
-                    <Input type="text" name="name" id="name" placeholder="Company Name" />
+                    <Input value={ this.state.company } onChange={ this.handleInputChange } type="text" name="company" id="name" placeholder="Company Name" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Contract Description</Label>
-                    <Input type="textarea" name="description" id="description" placeholder="Describe the contract details..." />
+                    <Input value={ this.state.description } onChange={ this.handleInputChange } type="textarea" name="description" id="description" placeholder="Describe the contract details..." />
                 </FormGroup>
                 <FormGroup>
                     <Label>Start Date</Label>
-                    <Input type="text" name="startDate" id="startDate" placeholder="mm/dd/yyyy" />
+                    <Input value={ this.state.start_date } onChange={ this.handleInputChange }type="text" name="start_date" id="start_date" placeholder="mm/dd/yyyy" />
                 </FormGroup>
                 <FormGroup>
                     <Label>End Date</Label>
-                    <Input type="text" name="endDate" id="endDate" placeholder="mm/dd/yyyy" />
+                    <Input value={ this.state.end_date } onChange={ this.handleInputChange } type="text" name="end_date" id="end_date" placeholder="mm/dd/yyyy" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Company Email</Label>
-                    <Input type="email" name="email" id="email" placeholder="xxxxxxxxx@xxxx.com" />
+                    <Input value={ this.state.contact_email } onChange={ this.handleInputChange } type="email" name="contact_email" id="email" placeholder="xxxxxxxxx@xxxx.com" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Company Phone Number</Label>
-                    <Input type="text" name="phone" id="phone" placeholder="123-456-7890" />
+                    <Input value={ this.state.contact_phone } onChange={ this.handleInputChange } type="text" name="contact_phone" id="contact_phone" placeholder="123-456-7890" />
                 </FormGroup>
                 <FormGroup tag="fieldset">
                     <legend>Contract Status</legend>
                     <FormGroup check>
                         <Label check>
-                            <Input type="radio" name="status" />{' '}
-                            Ongoing
+                            <Input value="Ongoing"  onChange={ this.handleInputChange } type="radio" name="status" />{'Ongoing'}
                         </Label>
                     </FormGroup>
                     <FormGroup check>
                         <Label check>
-                            <Input type="radio" name="status" />{' '}
-                            Completed
+                            <Input value="Completed" onChange={ this.handleInputChange } type="radio" name="status" />{'Completed'}
                         </Label>
                     </FormGroup>
                 </FormGroup>
-                <Button color='warning'>Submit</Button>
+                <Button color='warning' onClick={ this.handleFormSubmit }>Submit</Button>
             </Form>
           );
     }
