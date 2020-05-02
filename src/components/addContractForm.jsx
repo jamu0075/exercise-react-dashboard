@@ -5,24 +5,32 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 class ContractForm extends Component {
     // Local state to pass to parent
     state = {
-        id: '',
-        company: '',
-        description: '',
-        start_date: '',
-        end_date: '',
-        contact_email: '',
-        contact_phone: '',
-        status: '',
+        contract: {
+            id: '',
+            company: '',
+            description: '',
+            start_date: '',
+            end_date: '',
+            contact_email: '',
+            contact_phone: '',
+            status: '',
+        }
     };
 
-    // Set the local state based on form changes
+    // Set the local state based on form changes and validate inputs(not implemented)
     handleInputChange = (event) => {
         const field = event.target.name
         const value = event.target.value
-        this.setState({ [field]: value },
-                        () => { this.validateInput(field, value)} );
+        this.setState(prevState => ({
+                        contract: {
+                            ...prevState.contract,
+                            [field]: value
+                        }
+                    }),
+                    () => { this.validateInput(field, value)} );
     };
 
+    // Validates the input for each field in 'Add Contract' form
     validateInput = (field, value) => {
         switch(field) {
             case 'id':
@@ -48,7 +56,7 @@ class ContractForm extends Component {
 
     // On form submit, lift the state to grandparent(App.js) for handling
     handleFormSubmit = () => {
-        this.props.onAddContract(this.state);
+        this.props.onAddContract(this.state.contract);
     };
 
     render() { 
@@ -56,31 +64,31 @@ class ContractForm extends Component {
             <Form>
                 <FormGroup>
                     <Label>ID</Label>
-                    <Input value={ this.state.id } onChange={ this.handleInputChange } type="text" name="id" placeholder="xx" />
+                    <Input value={ this.state.contract.id } onChange={ this.handleInputChange } type="text" name="id" placeholder="xx" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Company Name</Label>
-                    <Input value={ this.state.company } onChange={ this.handleInputChange } type="text" name="company" id="name" placeholder="Company Name" />
+                    <Input value={ this.state.contract.company } onChange={ this.handleInputChange } type="text" name="company" id="name" placeholder="Company Name" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Contract Description</Label>
-                    <Input value={ this.state.description } onChange={ this.handleInputChange } type="textarea" name="description" id="description" placeholder="Describe the contract details..." />
+                    <Input value={ this.state.contract.description } onChange={ this.handleInputChange } type="textarea" name="description" id="description" placeholder="Describe the contract details..." />
                 </FormGroup>
                 <FormGroup>
                     <Label>Start Date</Label>
-                    <Input value={ this.state.start_date } onChange={ this.handleInputChange }type="text" name="start_date" id="start_date" placeholder="mm/dd/yyyy" />
+                    <Input value={ this.state.contract.start_date } onChange={ this.handleInputChange }type="text" name="start_date" id="start_date" placeholder="mm/dd/yyyy" />
                 </FormGroup>
                 <FormGroup>
                     <Label>End Date</Label>
-                    <Input value={ this.state.end_date } onChange={ this.handleInputChange } type="text" name="end_date" id="end_date" placeholder="mm/dd/yyyy" />
+                    <Input value={ this.state.contract.end_date } onChange={ this.handleInputChange } type="text" name="end_date" id="end_date" placeholder="mm/dd/yyyy" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Company Email</Label>
-                    <Input value={ this.state.contact_email } onChange={ this.handleInputChange } type="email" name="contact_email" id="email" placeholder="xxxxxxxxx@xxxx.com" />
+                    <Input value={ this.state.contract.contact_email } onChange={ this.handleInputChange } type="email" name="contact_email" id="email" placeholder="xxxxxxxxx@xxxx.com" />
                 </FormGroup>
                 <FormGroup>
                     <Label>Company Phone Number</Label>
-                    <Input value={ this.state.contact_phone } onChange={ this.handleInputChange } type="text" name="contact_phone" id="contact_phone" placeholder="123-456-7890" />
+                    <Input value={ this.state.contract.contact_phone } onChange={ this.handleInputChange } type="text" name="contact_phone" id="contact_phone" placeholder="123-456-7890" />
                 </FormGroup>
                 <FormGroup tag="fieldset">
                     <legend>Contract Status</legend>
