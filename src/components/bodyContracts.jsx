@@ -5,6 +5,8 @@ import ContractFrom from './addContractForm'
 import Popup from 'reactjs-popup';
 
 class BodyContracts extends Component {
+    // Create a row in the table per contract
+    // Button to delete a row by passing this row's unique ID to grandparent (App.js)
     createTableRow (contract) {
         return(
             <tr key={contract.unique_id}>
@@ -16,6 +18,7 @@ class BodyContracts extends Component {
                 <td>{ contract.description }</td>
                 <td>{ contract.contact_email }</td>
                 <td>{ contract.contact_phone }</td>
+                <td><Button color="danger" onClick={() => this.props.onDeleteContract(contract.unique_id) }>Delete</Button></td>
             </tr>
         )
     };
@@ -27,7 +30,7 @@ class BodyContracts extends Component {
                 <Popup trigger={<Button color="primary"className="mb-3"> Add Contract </Button>} modal>
                     <ContractFrom onAddContract={ this.props.onAddContract }/>
                 </Popup>
-                <Table className="table-responsive table-bordered">
+                <Table className="table table-responsive">
                     <thead>
                         <tr>
                             <th>ID</th>

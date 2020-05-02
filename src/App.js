@@ -10,7 +10,7 @@ import BodyHome from './components/bodyHome'
 import BodyContracts from './components/bodyContracts'
 
 class App extends Component {
-  // Simple single source state that maintains "authentication" status and contract info
+  // Simple single source state that maintains "authentication" status and contracts
   state = {
     isAuth: true,
     unique_id_value: 4,
@@ -51,7 +51,7 @@ class App extends Component {
     ]
   };
 
-  // Handles simple "Authentication" that toggles single source 'isAuth' boolean
+  // Handles simple "Authentication" that toggles the 'isAuth' boolean
   handleAuthenticate = () => {
     this.setState({ isAuth: !this.state.isAuth});
   };
@@ -61,7 +61,7 @@ class App extends Component {
     this.setState({ unique_id_value: this.state.unique_id_value + 1 })
   };
 
-  // Handles creating a new contract object and adding to single source contract list
+  // Handles creating a new contract object and adding to the contract list
   handleAddContract = (event) => {
     this.handleUniqueIDIncrement();
 
@@ -80,6 +80,11 @@ class App extends Component {
     this.setState({ contractList: this.state.contractList.concat(newContract) })
   };
 
+  // Handles removing a contract from the contract list via 'unique_id'
+  handleDeleteContract = (event) => {
+    this.setState({ contractList: this.state.contractList.filter((contract) => { return contract.unique_id !== event}) })
+  }
+
   render() {
     return (
       <div className="app">
@@ -89,7 +94,7 @@ class App extends Component {
           <Switch>
             <Route path='/' exact component={ BodyHome } />
             <Route path='/login' render={ (props) => <LoginPage {...props} onAuthenticate={ this.handleAuthenticate } isAuth={ this.state.isAuth } /> } />
-            <Route path='/contracts' render={ (props) => <BodyContracts {...props} onAddContract={ this.handleAddContract } contracts={this.state.contractList } />} />
+            <Route path='/contracts' render={ (props) => <BodyContracts {...props} onAddContract={ this.handleAddContract } onDeleteContract={ this.handleDeleteContract } contracts={this.state.contractList } />} />
           </Switch>
         </Router>
       </div>
