@@ -17,7 +17,33 @@ class ContractForm extends Component {
 
     // Set the local state based on form changes
     handleInputChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
+        const field = event.target.name
+        const value = event.target.value
+        this.setState({ [field]: value },
+                        () => { this.validateInput(field, value)} );
+    };
+
+    validateInput = (field, value) => {
+        switch(field) {
+            case 'id':
+                break;
+            case 'company':
+                break;
+            case 'description':
+                break;
+            case 'start_date':
+                break;
+            case 'end_date':
+                break;
+            case 'contact_email':
+                break;
+            case 'contact_phone':
+                break;
+            case 'status':
+                break;
+            default:
+                break;
+        }
     };
 
     // On form submit, lift the state to grandparent(App.js) for handling
