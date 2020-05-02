@@ -5,7 +5,6 @@ import './App.css';
 
 import Header from './components/header'
 import LoginPage from './components/login'
-import LoginRequired from './components/bodyLoginRequired'
 import NavColumn from './components/navColumn'
 import BodyHome from './components/bodyHome'
 import BodyContracts from './components/bodyContracts'
@@ -51,7 +50,7 @@ class App extends Component {
   };
 
   handleAuthenticate = () => {
-    this.setState( { isAuth: !this.state.isAuth});
+    this.setState({ isAuth: !this.state.isAuth});
   };
 
   render() {

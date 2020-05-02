@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
-import { Table } from 'reactstrap'
+import { Table, Button } from 'reactstrap'
+
+import ContractFrom from './addContractForm'
+import Popup from 'reactjs-popup';
 
 class BodyContracts extends Component {
+    state = {
+        isFormVisable: false
+    };
+
+    toggleForm = () => {
+        this.setState({ isFormVisable: !this.state.isFormVisable });
+    }
+
     createTableRow (contract) {
         return(
             <tr key={contract.unique_id}>
@@ -21,6 +32,11 @@ class BodyContracts extends Component {
         return (
             <div className='body'>
                 <h1>Contracts</h1>
+                {/* <Button color="primary mb-3" onClick={ this.toggleForm }>Add Contract</Button> */}
+                {/* { this.state.isFormVisable ? <ContractFrom /> : null } */}
+                <Popup trigger={<Button color="primary"className="mb-3"> Add Contract </Button>} modal>
+                    <ContractFrom />
+                </Popup>
                 <Table className="table-responsive table-bordered">
                     <thead>
                         <tr>
