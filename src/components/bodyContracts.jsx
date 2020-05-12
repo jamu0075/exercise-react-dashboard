@@ -13,11 +13,11 @@ class BodyContracts extends Component {
                 <td>{ contract.id }</td>
                 <td>{ contract.status }</td>
                 <td>{ contract.company }</td>
-                <td>{ contract.start_date }</td>
-                <td>{ contract.end_date }</td>
+                <td>{ contract.startDate }</td>
+                <td>{ contract.endDate }</td>
                 <td>{ contract.description }</td>
-                <td>{ contract.contact_email }</td>
-                <td>{ contract.contact_phone }</td>
+                <td>{ contract.contactEmail }</td>
+                <td>{ contract.contactPhone }</td>
                 <td><Button color="danger" onClick={() => this.props.onDeleteContract(contract.unique_id) }>Delete</Button></td>
             </tr>
         )

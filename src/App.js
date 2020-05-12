@@ -20,33 +20,33 @@ class App extends Component {
           id: '1',
           status: 'Ongoing',
           company: 'A',
-          start_date: '01/01/2020',
-          end_date: '06/01/2020',
+          startDate: '01-01-2020',
+          endDate: '06-01-2020',
           description: 'Details about the contract here...',
-          contact_email: 'company.A.email@company.co',
-          contact_phone: '123-456-7890'
+          contactEmail: 'company.A.email@company.co',
+          contactPhone: '123-456-7890'
       },
       {
           unique_id: 2,
           id: '2',
           status: 'Ongoing',
           company: 'B',
-          start_date: '10/01/2019',
-          end_date: '10/01/2020',
+          startDate: '10-01-2019',
+          endDate: '10-01-2020',
           description: 'This is a good contract!',
-          contact_email: 'insurance@company.co',
-          contact_phone: '123-456-7890'
+          contactEmail: 'insurance@company.co',
+          contactPhone: '123-456-7890'
       },
       {
           unique_id: 3,
           id: '3',
           status: 'Completed',
           company: 'C',
-          start_date: '11/01/2019',
-          end_date: '03/01/2020',
+          startDate: '11-01-2019',
+          endDate: '03-01-2020',
           description: 'This went well! Would love to work with them again.',
-          contact_email: 'insurance@company.co',
-          contact_phone: '123-456-7890'   
+          contactEmail: 'insurance@company.co',
+          contactPhone: '123-456-7890'   
       }
     ]
   };
@@ -70,11 +70,11 @@ class App extends Component {
       id: event.id,
       status: event.status,
       company: event.company,
-      start_date: event.start_date,
-      end_date: event.end_date,
+      startDate: event.startDate,
+      endDate: event.endDate,
       description: event.description,
-      contact_email: event.contact_email,
-      contact_phone: event.contact_phone 
+      contactEmail: event.contactEmail,
+      contactPhone: event.contactPhone 
     };
     
     this.setState({ contractList: this.state.contractList.concat(newContract) })
